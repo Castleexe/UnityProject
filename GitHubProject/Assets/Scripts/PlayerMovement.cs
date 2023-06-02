@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        Debug.Log("Hello");
     }
 
     void Update()
