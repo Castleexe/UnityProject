@@ -10,12 +10,11 @@ public class PlayerMovement : MonoBehaviour
     float vertical;
     float moveLimiter = 0.7f;
 
-    public float runSpeed = 20.0f;
+    public float runSpeed = 6.9f;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        Debug.Log("Hello");
     }
 
     void Update()
@@ -32,7 +31,29 @@ public class PlayerMovement : MonoBehaviour
             // limit movement speed diagonally, so you move at 70% speed
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
+        }  
+
+        if(vertical > 0)
+        {
+            Debug.Log("Up");
         }
+        else if(vertical < 0)
+        {
+            Debug.Log("Down");
+        }
+        else if(horizontal > 0)
+        {
+            Debug.Log("right");
+        }
+        else if(horizontal < 0)
+        {
+            Debug.Log("Left");
+        }
+        else
+        {
+            Debug.Log("Idle");
+        }
+            
 
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
     }
