@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D body;
+    SpriteRenderer sp;
+    Animator anim;
 
     float horizontal;
     float vertical;
@@ -12,9 +14,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float runSpeed = 6.9f;
 
+    enum movementState { idle, forward, back, side};
+    movementState state = movementState.idle;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        sp = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -35,26 +42,35 @@ public class PlayerMovement : MonoBehaviour
 
         if(vertical > 0)
         {
-            Debug.Log("Up");
+            state = movementState.back;
+            Debug.Log("down");
         }
         else if(vertical < 0)
         {
-            Debug.Log("Down");
+            state = movementState.forward;
+            Debug.Log("up");
         }
         else if(horizontal > 0)
         {
+            sp.flipX = false;
+            state = movementState.side;
             Debug.Log("right");
         }
         else if(horizontal < 0)
         {
+            sp.flipX = true;
+            state = movementState.side;
             Debug.Log("Left");
         }
         else
         {
+            state = movementState.idle;
             Debug.Log("Idle");
         }
             
 
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+
+        anim.SetInteger("State", (int)state);
     }
 }
