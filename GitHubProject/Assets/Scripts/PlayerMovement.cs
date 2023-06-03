@@ -43,29 +43,24 @@ public class PlayerMovement : MonoBehaviour
         if(vertical > 0)
         {
             state = movementState.back;
-            Debug.Log("down");
         }
         else if(vertical < 0)
         {
             state = movementState.forward;
-            Debug.Log("up");
         }
         else if(horizontal > 0)
         {
             sp.flipX = false;
             state = movementState.side;
-            Debug.Log("right");
         }
         else if(horizontal < 0)
         {
             sp.flipX = true;
             state = movementState.side;
-            Debug.Log("Left");
         }
         else
         {
             state = movementState.idle;
-            Debug.Log("Idle");
         }
             
 
